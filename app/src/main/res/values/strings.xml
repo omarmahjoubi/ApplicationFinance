@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Parsing</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_palmares">Hausses</string>
+    <string name="afficher_palmares">afficher palmarés</string>
+    <string name="titre_valeur">valeur</string>
+    <string name="titre_variation">variation</string>
+    <string name="title_activity_baisses">BaissesActivity</string>
+    <string name="display_baisses">afficher les baisses</string>
+    <string name="display_hausses">afficher les hausses</string>
+</resources>
