@@ -40,11 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void displayPalmares(View view) {
-        Intent intent = new Intent(this,HaussesActivity.class) ;
-        startActivity(intent);
 
-    }
 
     private class URLReader extends AsyncTask<String,Integer,String> {
         @Override
@@ -93,14 +89,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Intent intent ;
+        switch (item.getItemId()){
+            case R.id.display_palmares:
+                intent = new Intent(this,HaussesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.display_devise:
+                intent = new Intent(this,DeviseActivity.class);
+                startActivity(intent);
+                return true ;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
         }
 
         return super.onOptionsItemSelected(item);

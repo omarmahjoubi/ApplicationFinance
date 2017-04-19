@@ -39,10 +39,7 @@ public class HaussesActivity extends AppCompatActivity {
         new URLReader().execute("http://www.ilboursa.com/marches/palmares.aspx");
     }
 
-    public void displayBaisses(View view) {
-        Intent intent = new Intent(this, BaissesActivity.class);
-        startActivity(intent);
-    }
+
 
 
     private class URLReader extends AsyncTask<String, Integer, String> {

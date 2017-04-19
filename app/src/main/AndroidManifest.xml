@@ -27,6 +27,10 @@
         <activity
             android:name=".BaissesActivity"
             android:label="@string/title_activity_baisses"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DeviseActivity"
+            android:label="@string/title_activity_devise"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

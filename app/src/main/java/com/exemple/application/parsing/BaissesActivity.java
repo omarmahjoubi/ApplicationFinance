@@ -36,10 +36,7 @@ public class BaissesActivity extends AppCompatActivity {
     }
 
 
-    public void displayHausses(View view) {
-        Intent intent = new Intent(this,HaussesActivity.class);
-        startActivity(intent);
-    }
+    
 
 
     private class URLReader extends AsyncTask<String, Integer, String> {

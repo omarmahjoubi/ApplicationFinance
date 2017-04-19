@@ -8,6 +8,20 @@
         android:title="@string/action_settings"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/display_palmares"
+        android:orderInCategory="100"
+        android:title="@string/afficher_palmares"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/display_devise"
+        android:orderInCategory="100"
+        android:title="@string/afficher_devise"
+        app:showAsAction="never" />
+
+
+
 
 
 </menu>

@@ -9,4 +9,18 @@
     <string name="display_baisses">afficher les baisses</string>
     <string name="display_hausses">afficher les hausses</string>
     <string name="acceuil">Acceuil</string>
+    <string name="title_activity_devise">Convertisseur de devise</string>
+    <string name="afficher_devise">convertisseur de devise</string>
+    <string name="button_convert">convertir</string>
+
+
+
+    <string name="devise_defaut1">Dinar Tunisier</string>
+    <string-array name="devises">
+        <item>Dinar Tunisien</item>
+        <item>Euro</item>
+        <item>Dollar US</item>
+        <item>Livre Sterling</item>
+    </string-array>
+
 </resources>
