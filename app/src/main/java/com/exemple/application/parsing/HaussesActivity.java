@@ -8,6 +8,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -41,6 +43,7 @@ public class HaussesActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BaissesActivity.class);
         startActivity(intent);
     }
+
 
     private class URLReader extends AsyncTask<String, Integer, String> {
 
@@ -106,7 +109,7 @@ public class HaussesActivity extends AppCompatActivity {
 
 
 
-            String[] elementList = { "" , "" , "" , "" , "" } ;
+
 
 
             ListView hausses = (ListView) findViewById(R.id.hausses);
@@ -126,6 +129,32 @@ public class HaussesActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_hausses, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent ;
+        switch (item.getItemId()){
+            case R.id.acceuil:
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.baisses:
+                intent = new Intent(this, BaissesActivity.class);
+                startActivity(intent);
+                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
 }

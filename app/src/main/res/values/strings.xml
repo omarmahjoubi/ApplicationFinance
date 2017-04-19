@@ -5,7 +5,8 @@
     <string name="afficher_palmares">afficher palmarés</string>
     <string name="titre_valeur">valeur</string>
     <string name="titre_variation">variation</string>
-    <string name="title_activity_baisses">BaissesActivity</string>
+    <string name="title_activity_baisses">Baisses</string>
     <string name="display_baisses">afficher les baisses</string>
     <string name="display_hausses">afficher les hausses</string>
+    <string name="acceuil">Acceuil</string>
 </resources>

@@ -12,12 +12,10 @@
     tools:context="com.exemple.application.parsing.BaissesActivity"
     tools:showIn="@layout/activity_baisses">
 
-    <Button
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/display_hausses"
-        android:id="@+id/button3"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/baisses"
         android:layout_centerHorizontal="true"
-        android:onClick="displayHausses"/>
+        android:layout_alignParentTop="true" />
 </RelativeLayout>
