@@ -1,6 +1,7 @@
 package com.exemple.application.parsing.guielemement;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,9 +43,13 @@ public class CoursAdapter extends ArrayAdapter<CoursData> {
 
         //il ne reste plus qu'à remplir notre vue
         viewHolder.code.setText(elementList.getCode());
+        viewHolder.code.setTextColor(Color.BLACK);
         viewHolder.unite.setText(elementList.getUnite());
+        viewHolder.unite.setTextColor(Color.BLACK);
         viewHolder.achat.setText(elementList.getAchat());
+        viewHolder.achat.setTextColor(Color.BLACK);
         viewHolder.vente.setText(elementList.getVente());
+        viewHolder.vente.setTextColor(Color.BLACK);
 
 
 
