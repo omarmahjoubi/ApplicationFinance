@@ -13,6 +13,8 @@
     <string name="afficher_devise">convertisseur de devise</string>
     <string name="button_convert">convertir</string>
     <string name="display_cours">affihcer les cours</string>
+    <string name="tunindex">TUNINDEX</string>
+    <string name="actualite">Actualités</string>
 
 
     <string name="code">désignation : </string>

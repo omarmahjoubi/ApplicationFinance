@@ -1,6 +1,10 @@
 package com.exemple.application.parsing;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,15 +14,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.exemple.application.parsing.guielemement.Actu;
+import com.exemple.application.parsing.guielemement.ActuAdapter;
+import com.exemple.application.parsing.guielemement.ElementAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.MalformedInputException;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
-    private URLReader reader ;
+    private URLReader reader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,45 +45,70 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        new URLReader().execute("http://www.bvmt.com.tn/");
+
+        new URLReader().execute("http://www.ilboursa.com/");
 
 
     }
 
 
+    private class URLReader extends AsyncTask<String, Integer, String> {
 
-    private class URLReader extends AsyncTask<String,Integer,String> {
+        private String urlImage;
+        private String variation ;
+        private String cours ;
+        private Bitmap bmpGraphe ;
+        private Bitmap bmpFlag ;
+        private ArrayList<Actu> actus = new ArrayList<>();
+
+
         @Override
         protected String doInBackground(String... params) {
-            Document doc = null ;
+            Document doc = null;
             try {
-                doc = Jsoup.connect(params[0]).get() ;
-            }
-            catch (Exception e) {
+                doc = Jsoup.connect(params[0]).get();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            String title = "" ;
+            String title = "";
             if (doc != null) {
-                Elements links = doc.getElementsByTag("a") ;
-                for (Element link : links) {
-                    String href = " href : " + link.attr("href") +";" ;
-                    String linkText = " link : " +link.text()  ;
-                    title = title + href + linkText + "\n" ;
+                Elements variation = doc.select("div + span");
+                for (Element el : variation) {
+                    this.variation = el.text() ;
                 }
+                Elements data = doc.select(".f14");
+                for (Element el : data) {
+                    if ((!el.text().contains("%")) && (!el.text().contains(":"))) {
+                        this.cours = el.text() ;
+                    }
+
+                }
+
+                Element img = doc.getElementById("ctl00_BodyABC_chartTN");
+                urlImage = "http://www.ilboursa.com/" + img.attr("src");
+                try {
+                    URL url = new URL(this.urlImage);
+                    bmpGraphe = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    URL url1 = new URL("http://www.ilboursa.com/i/tn.png");
+                    bmpFlag = BitmapFactory.decodeStream(url1.openConnection().getInputStream());
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Elements infos = doc.select(".f14");
+                for (Element el : infos) {
+                    if (el.text().length()>=10) {
+                        Actu actu = new Actu(el.text() ,"http://www.ilboursa.com/" + el.attr("href")) ;
+                        this.actus.add(actu) ;
+                    }
+
+                }
+
+
             }
-            return title ;
-
-
-
-
+            return title;
 
 
         }
@@ -73,9 +116,44 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
+            ImageView graphe = (ImageView) findViewById(R.id.graphe);
+            //graphe.setImageBitmap(bmp);
+            graphe.setImageBitmap(Bitmap.createScaledBitmap(bmpGraphe, 400, 250, false));
 
-        /*    TextView txt = (TextView) findViewById(R.id.html);
-            txt.setText(result); */
+            ImageView flag = (ImageView) findViewById(R.id.tn_flag);
+            //graphe.setImageBitmap(bmp);
+            flag.setImageBitmap(bmpFlag);
+
+            TextView variation = (TextView) findViewById(R.id.variation) ;
+            variation.setText(this.variation);
+            if (this.variation.contains("-")) {
+                variation.setTextColor(Color.rgb(255, 0, 0));
+            } else {
+                variation.setTextColor(Color.rgb(0, 153, 51));
+            }
+
+            TextView cours = (TextView) findViewById(R.id.cours) ;
+            cours.setText(this.cours);
+
+
+            ListView actu = (ListView) findViewById(R.id.actu) ;
+            ActuAdapter adapter = new ActuAdapter(MainActivity.this, this.actus);
+            actu.setAdapter(adapter);
+
+           actu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent,
+                                        View view, int position, long id) {
+                    Actu actu = (Actu) parent.getAdapter().getItem(position);
+                    String url = actu.getUrl();
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
+                }
+            });
+
 
         }
     }
@@ -89,16 +167,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent ;
-        switch (item.getItemId()){
+        Intent intent;
+        switch (item.getItemId()) {
             case R.id.display_palmares:
-                intent = new Intent(this,HaussesActivity.class);
+                intent = new Intent(this, HaussesActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.display_devise:
-                intent = new Intent(this,DeviseActivity.class);
+                intent = new Intent(this, DeviseActivity.class);
                 startActivity(intent);
-                return true ;
+                return true;
 
 
         }
