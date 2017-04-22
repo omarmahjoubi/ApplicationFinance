@@ -1,9 +1,12 @@
 package com.exemple.application.parsing;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -55,92 +58,117 @@ public class MainActivity extends AppCompatActivity {
     private class URLReader extends AsyncTask<String, Integer, String> {
 
         private String urlImage;
-        private String variation ;
-        private String cours ;
-        private Bitmap bmpGraphe ;
-        private Bitmap bmpFlag ;
+        private String variation = null;
+        private String cours = null;
+        private Bitmap bmpGraphe = null;
+        private Bitmap bmpFlag = null;
         private ArrayList<Actu> actus = new ArrayList<>();
 
 
         @Override
         protected String doInBackground(String... params) {
-            Document doc = null;
-            try {
-                doc = Jsoup.connect(params[0]).get();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             String title = "";
-            if (doc != null) {
-                Elements variation = doc.select("div + span");
-                for (Element el : variation) {
-                    this.variation = el.text() ;
-                }
-                Elements data = doc.select(".f14");
-                for (Element el : data) {
-                    if ((!el.text().contains("%")) && (!el.text().contains(":"))) {
-                        this.cours = el.text() ;
-                    }
-
-                }
-
-                Element img = doc.getElementById("ctl00_BodyABC_chartTN");
-                urlImage = "http://www.ilboursa.com/" + img.attr("src");
+            if (isNetworkAvailable()) {
+                Document doc = null;
                 try {
-                    URL url = new URL(this.urlImage);
-                    bmpGraphe = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    URL url1 = new URL("http://www.ilboursa.com/i/tn.png");
-                    bmpFlag = BitmapFactory.decodeStream(url1.openConnection().getInputStream());
-
-
+                    doc = Jsoup.connect(params[0]).get();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                Elements infos = doc.select(".f14");
-                for (Element el : infos) {
-                    if (el.text().length()>=10) {
-                        Actu actu = new Actu(el.text() ,"http://www.ilboursa.com/" + el.attr("href")) ;
-                        this.actus.add(actu) ;
+                if (doc != null) {
+                    Elements variation = doc.select("div + span");
+                    for (Element el : variation) {
+                        this.variation = el.text();
+                    }
+                    Elements data = doc.select(".f14");
+                    for (Element el : data) {
+                        if ((!el.text().contains("%")) && (!el.text().contains(":"))) {
+                            this.cours = el.text();
+                        }
+
                     }
 
+                    Element img = doc.getElementById("ctl00_BodyABC_chartTN");
+                    urlImage = "http://www.ilboursa.com/" + img.attr("src");
+                    try {
+                        URL url = new URL(this.urlImage);
+                        bmpGraphe = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        URL url1 = new URL("http://www.ilboursa.com/i/tn.png");
+                        bmpFlag = BitmapFactory.decodeStream(url1.openConnection().getInputStream());
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    Elements infos = doc.select(".f14");
+                    for (Element el : infos) {
+                        if (el.text().length() >= 10) {
+                            Actu actu = new Actu(el.text(), "http://www.ilboursa.com/" + el.attr("href"));
+                            this.actus.add(actu);
+                        }
+
+                    }
+
+
                 }
-
-
             }
             return title;
 
 
         }
 
+        private boolean isNetworkAvailable() {
+            ConnectivityManager connectivityManager
+                    = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+
         @Override
         protected void onPostExecute(String result) {
 
-            ImageView graphe = (ImageView) findViewById(R.id.graphe);
-            //graphe.setImageBitmap(bmp);
-            graphe.setImageBitmap(Bitmap.createScaledBitmap(bmpGraphe, 400, 250, false));
-
-            ImageView flag = (ImageView) findViewById(R.id.tn_flag);
-            //graphe.setImageBitmap(bmp);
-            flag.setImageBitmap(bmpFlag);
-
-            TextView variation = (TextView) findViewById(R.id.variation) ;
-            variation.setText(this.variation);
-            if (this.variation.contains("-")) {
-                variation.setTextColor(Color.rgb(255, 0, 0));
-            } else {
-                variation.setTextColor(Color.rgb(0, 153, 51));
+            if (isNetworkAvailable()) {
+                TextView tunindex = (TextView) findViewById(R.id.tunindex);
+                tunindex.setText("TUNINDEX");
+                TextView titleActu = (TextView) findViewById(R.id.titre_actu);
+                titleActu.setText("Actualités");
+                titleActu.setTextColor(Color.BLUE);
             }
 
-            TextView cours = (TextView) findViewById(R.id.cours) ;
+
+            ImageView graphe = (ImageView) findViewById(R.id.graphe);
+            //graphe.setImageBitmap(bmp);
+            if (bmpGraphe != null) {
+                graphe.setImageBitmap(Bitmap.createScaledBitmap(bmpGraphe, 400, 250, false));
+            }
+            ImageView flag = (ImageView) findViewById(R.id.tn_flag);
+            //graphe.setImageBitmap(bmp);
+            if (bmpFlag != null) {
+                flag.setImageBitmap(bmpFlag);
+            }
+            TextView variation = (TextView) findViewById(R.id.variation);
+            variation.setText(this.variation);
+
+            if (this.variation != null) {
+                if (this.variation.contains("-")) {
+                    variation.setTextColor(Color.rgb(255, 0, 0));
+                } else {
+                    variation.setTextColor(Color.rgb(0, 153, 51));
+                }
+            }
+
+
+            TextView cours = (TextView) findViewById(R.id.cours);
             cours.setText(this.cours);
 
 
-            ListView actu = (ListView) findViewById(R.id.actu) ;
+            ListView actu = (ListView) findViewById(R.id.actu);
             ActuAdapter adapter = new ActuAdapter(MainActivity.this, this.actus);
             actu.setAdapter(adapter);
 
-           actu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            actu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent,
                                         View view, int position, long id) {
@@ -156,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+
     }
 
     @Override
