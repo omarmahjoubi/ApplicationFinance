@@ -11,8 +11,8 @@
     <string name="acceuil">Acceuil</string>
     <string name="title_activity_devise">Convertisseur de devise</string>
     <string name="afficher_devise">convertisseur de devise</string>
-    <string name="button_convert">convertir</string>
-    <string name="display_cours">affihcer les cours</string>
+    <string name="button_convert">Convertir</string>
+    <string name="display_cours">cours d\'echange des devises</string>
 
 
 
