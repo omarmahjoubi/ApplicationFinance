@@ -1,9 +1,12 @@
 package com.exemple.application.parsing;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.exemple.application.parsing.guielemement.CoursAdapter;
@@ -85,6 +88,33 @@ public class CoursActivity extends AppCompatActivity {
             hausses.setAdapter(adapter);
         }
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_cours, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.acceuil:
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.display_palmares:
+                intent = new Intent(this, HaussesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.display_convertisseur:
+                intent = new Intent(this, DeviseActivity.class);
+                startActivity(intent);
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

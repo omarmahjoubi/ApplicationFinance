@@ -2,17 +2,17 @@
     <string name="app_name">Parsing</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_palmares">Hausses</string>
-    <string name="afficher_palmares">afficher palmarés</string>
+    <string name="afficher_palmares">Palmarés</string>
     <string name="titre_valeur">valeur</string>
     <string name="titre_variation">variation</string>
     <string name="title_activity_baisses">Baisses</string>
-    <string name="display_baisses">afficher les baisses</string>
-    <string name="display_hausses">afficher les hausses</string>
+    <string name="display_baisses">Baisses</string>
+    <string name="display_hausses">Hausses</string>
     <string name="acceuil">Acceuil</string>
     <string name="title_activity_devise">Convertisseur de devise</string>
-    <string name="afficher_devise">convertisseur de devise</string>
+    <string name="afficher_convertisseur">convertisseur de devise</string>
     <string name="button_convert">Convertir</string>
-    <string name="display_cours">cours d\'echange des devises</string>
+    <string name="afficher_cours_devise">cours d\'echange des devises</string>
 
 
 

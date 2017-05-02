@@ -74,10 +74,6 @@ public class HaussesActivity extends AppCompatActivity {
                 String title = "";
                 if (doc != null) {
                     Elements datas = doc.select(".alri") ;
-                    String var = null  ;
-                    String vol =null;
-                    String cours=null ;
-                    String val=null  ;
                     ArrayList<String> donnees = new ArrayList<>() ;
                 for (Element data : datas) {
                         donnees.add(data.text()) ;
@@ -176,6 +172,14 @@ public class HaussesActivity extends AppCompatActivity {
                 return true;
             case R.id.baisses:
                 intent = new Intent(this, BaissesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.display_convertisseur:
+                intent = new Intent(this, DeviseActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.display_cours_devise:
+                intent = new Intent(this, CoursActivity.class);
                 startActivity(intent);
                 return true;
 

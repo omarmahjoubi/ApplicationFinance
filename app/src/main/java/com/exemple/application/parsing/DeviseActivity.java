@@ -194,7 +194,11 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
                 intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.display_cours:
+            case R.id.display_palmares:
+                intent = new Intent(this, HaussesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.display_cours_devise:
                 intent = new Intent(this, CoursActivity.class);
                 startActivity(intent);
                 return true;

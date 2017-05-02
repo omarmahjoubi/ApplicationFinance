@@ -198,8 +198,12 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, HaussesActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.display_devise:
+            case R.id.display_convertisseur:
                 intent = new Intent(this, DeviseActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.display_cours_devise:
+                intent = new Intent(this, CoursActivity.class);
                 startActivity(intent);
                 return true;
 
