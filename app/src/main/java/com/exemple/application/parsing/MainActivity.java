@@ -49,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private class URLReader extends AsyncTask<String, Integer, String> {
+
+
+
+
+
+
+        private class URLReader extends AsyncTask<String, Integer, String> {
 
         private String urlImage;
         private String variation = null;
@@ -204,6 +210,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.display_cours_devise:
                 intent = new Intent(this, CoursActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.home2:
+                intent = new Intent(this, Main2Activity.class);
                 startActivity(intent);
                 return true;
 

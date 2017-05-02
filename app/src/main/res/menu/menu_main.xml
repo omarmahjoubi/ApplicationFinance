@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.exemple.application.parsing.MainActivity">
 
+    <item
+        android:id="@+id/home2"
+        android:orderInCategory="100"
+        android:title="Acceuil2"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/display_palmares"
