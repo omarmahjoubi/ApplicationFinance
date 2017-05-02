@@ -10,31 +10,25 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.exemple.application.parsing.guielemement.Actu;
 import com.exemple.application.parsing.guielemement.ActuAdapter;
-import com.exemple.application.parsing.guielemement.ElementAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -83,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Elements data = doc.select(".f14");
                     for (Element el : data) {
-                        if ((!el.text().contains("%")) && (!el.text().contains(":"))) {
+                        System.out.println(el.text()) ;
+                        if ((!el.text().contains("%")) && (el.text().length()<15)) {
                             this.cours = el.text();
                         }
 
@@ -104,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Elements infos = doc.select(".f14");
                     for (Element el : infos) {
-                        if (el.text().length() >= 10) {
+                        if (el.text().length() >= 15) {
                             Actu actu = new Actu(el.text(), "http://www.ilboursa.com/" + el.attr("href"));
                             this.actus.add(actu);
                         }

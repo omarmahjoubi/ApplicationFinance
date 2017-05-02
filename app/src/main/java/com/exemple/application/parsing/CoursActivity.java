@@ -2,18 +2,12 @@ package com.exemple.application.parsing;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ListView;
 
-import com.exemple.application.parsing.devises.Converter;
 import com.exemple.application.parsing.guielemement.CoursAdapter;
 import com.exemple.application.parsing.guielemement.CoursData;
-import com.exemple.application.parsing.guielemement.ElementAdapter;
-import com.exemple.application.parsing.guielemement.ElementList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,7 +15,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CoursActivity extends AppCompatActivity {
 

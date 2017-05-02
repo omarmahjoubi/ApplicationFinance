@@ -1,22 +1,16 @@
 package com.exemple.application.parsing;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.exemple.application.parsing.guielemement.ElementAdapter;
-import com.exemple.application.parsing.guielemement.ElementList;
+import com.exemple.application.parsing.guielemement.ElementHaussesAdapter;
+import com.exemple.application.parsing.guielemement.ElementHaussesList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -49,25 +43,64 @@ public class HaussesActivity extends AppCompatActivity {
 
         private String[] variations = {"", "", "", "", ""};
 
+        private String[] cours = {"", "", "", "", ""};
+
+        private String[] volumes = {"", "", "", "", ""};
+
+        public String[] getVolumes() {
+            return volumes;
+        }
+
+        public String[] getCours() {
+            return cours;
+        }
+
         public String[] getValeurs() {
             return valeurs;
         }
 
         public String[] getVariations() {
             return variations;
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            Document doc = null;
-            try {
-                doc = Jsoup.connect(params[0]).get();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-            String title = "";
-            if (doc != null) {
-                Elements valeurs = doc.select("td a");
+
+            @Override
+            protected String doInBackground(String... params) {
+                Document doc = null;
+                try {
+                    doc = Jsoup.connect(params[0]).get();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String title = "";
+                if (doc != null) {
+                    Elements datas = doc.select(".alri") ;
+                    String var = null  ;
+                    String vol =null;
+                    String cours=null ;
+                    String val=null  ;
+                    ArrayList<String> donnees = new ArrayList<>() ;
+                for (Element data : datas) {
+                        donnees.add(data.text()) ;
+                        }
+                    int j = 0 ;
+                    for(int i =0 ; i < donnees.size() ; i++) {
+                    if ( i < 5) {
+                        String[] list = donnees.get(i).split(" ") ;
+                        this.variations[j] = list[list.length-2] ;
+                        this.volumes[j] = list[list.length-3] ;
+                        this.cours[j] = list[list.length-4] ;
+                        String valeur = list[0] ;
+                        for (int k=1;k<list.length-6;k++) {
+                            valeur = valeur + " " + list[k] ;
+                        }
+                        this.valeurs[j]=valeur ;
+                        j++ ;
+                    }
+                }
+
+
+
+              /*  Elements valeurs = doc.select("td a");
                 ArrayList<Element> valeurElements = new ArrayList<>();
                 for (Element valeur : valeurs) {
                     valeurElements.add(valeur);
@@ -83,7 +116,7 @@ public class HaussesActivity extends AppCompatActivity {
                 for (Element variation : variations) {
                     variationElements.add(variation);
                 }
-                int j = 0;
+                int  j = 0;
                 int k = 0;
                 while (j < 5) {
                     if (k < variationElements.size()) {
@@ -92,7 +125,7 @@ public class HaussesActivity extends AppCompatActivity {
                         j++;
                         k += 2;
 
-                }
+                } */
             }
             return title;
 
@@ -101,8 +134,7 @@ public class HaussesActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
-            String[] valeurs = this.getValeurs();
-            String[] variations = this.getVariations();
+
 
 
 
@@ -112,12 +144,12 @@ public class HaussesActivity extends AppCompatActivity {
             ListView hausses = (ListView) findViewById(R.id.hausses);
 
 
-            List<ElementList> elements = new ArrayList<>();
+            List<ElementHaussesList> elements = new ArrayList<>();
             for (int i=0;i<valeurs.length;i++) {
-                elements.add(new ElementList(valeurs[i],variations[i])) ;
+                elements.add(new ElementHaussesList(this.variations[i],this.valeurs[i],this.cours[i],this.volumes[i])) ;
             }
 
-            ElementAdapter adapter = new ElementAdapter(HaussesActivity.this, elements);
+            ElementHaussesAdapter adapter = new ElementHaussesAdapter(HaussesActivity.this, elements);
             hausses.setAdapter(adapter);
 
         /*    TextView txt = (TextView) findViewById(R.id.html);
