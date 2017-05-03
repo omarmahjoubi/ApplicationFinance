@@ -94,34 +94,6 @@ public class HaussesActivity extends AppCompatActivity {
                     }
                 }
 
-
-
-              /*  Elements valeurs = doc.select("td a");
-                ArrayList<Element> valeurElements = new ArrayList<>();
-                for (Element valeur : valeurs) {
-                    valeurElements.add(valeur);
-                }
-                for (int i = 0; i < 5; i++) {
-                    if (i < valeurElements.size()) {
-                        this.valeurs[i] = valeurElements.get(i).text();
-                    }
-                }
-
-                Elements variations = doc.select(".quote_up2");
-                ArrayList<Element> variationElements = new ArrayList<>();
-                for (Element variation : variations) {
-                    variationElements.add(variation);
-                }
-                int  j = 0;
-                int k = 0;
-                while (j < 5) {
-                    if (k < variationElements.size()) {
-                        this.variations[j] = variationElements.get(k).text();
-                    }
-                        j++;
-                        k += 2;
-
-                } */
             }
             return title;
 
@@ -167,7 +139,7 @@ public class HaussesActivity extends AppCompatActivity {
         Intent intent ;
         switch (item.getItemId()){
             case R.id.acceuil:
-                intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, Main2Activity.class);
                 startActivity(intent);
                 return true;
             case R.id.baisses:

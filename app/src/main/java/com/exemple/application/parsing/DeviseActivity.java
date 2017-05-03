@@ -191,7 +191,7 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
         Intent intent;
         switch (item.getItemId()) {
             case R.id.acceuil:
-                intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, Main2Activity.class);
                 startActivity(intent);
                 return true;
             case R.id.display_palmares:

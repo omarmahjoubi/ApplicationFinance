@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,8 +21,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="TUNINDEX"
         android:id="@+id/tunindex"
+        android:textSize="17sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="50dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,11 +34,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="cours"
         android:id="@+id/cours"
-        android:layout_below="@+id/tunindex"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="43dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_alignTop="@+id/tunindex"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,7 +47,17 @@
         android:id="@+id/variation"
         android:layout_alignTop="@+id/cours"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="25dp"
+        />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:id="@+id/variation_image"
+        android:layout_toLeftOf="@+id/variation"
+        android:layout_alignTop="@+id/variation"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text=""
         android:id="@+id/volumeTitre"
         android:layout_alignTop="@+id/volumeTitre_label"
         android:layout_alignParentRight="true"
@@ -77,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text=""
         android:id="@+id/volume"
         android:layout_alignTop="@+id/volume_label"
         android:layout_alignLeft="@+id/volumeTitre"
@@ -97,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text=""
         android:id="@+id/ouverture"
         android:layout_below="@+id/volume"
         android:layout_alignParentRight="true"
@@ -117,7 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text=""
         android:id="@+id/plus_haut"
         android:layout_below="@+id/ouverture"
         android:layout_alignParentRight="true"
@@ -137,7 +153,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text=""
         android:id="@+id/plus_bas"
         android:layout_alignTop="@+id/plus_bas_label"
         android:layout_alignParentRight="true"
@@ -157,7 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text=""
         android:id="@+id/cloture"
         android:layout_below="@+id/plus_bas"
         android:layout_alignParentRight="true"
@@ -177,10 +193,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text=""
         android:id="@+id/volatilite"
         android:layout_below="@+id/cloture"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/capital_echange"
+        android:id="@+id/capital_echange_label"
+        android:layout_below="@+id/volatilite_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/capital_echange"
+        android:layout_below="@+id/volatilite"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/valorisation"
+        android:id="@+id/valorisation_label"
+        android:layout_below="@+id/capital_echange_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/valorisation"
+        android:layout_alignTop="@+id/valorisation_label"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/actu"
+        android:id="@+id/titre_actu"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/valorisation_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:id="@+id/actus"
+        android:layout_below="@+id/titre_actu"
+         />
+
 </RelativeLayout>
+</ScrollView>

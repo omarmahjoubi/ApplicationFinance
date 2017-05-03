@@ -51,6 +51,7 @@ public class CoursActivity extends AppCompatActivity {
                 Elements devises = doc.select("tr");
                 for (Element devise : devises) {
                     String data = devise.text();
+                    System.out.println("devise ====> "+data) ;
                     String[] list = data.split(" ");
 
                     if (list.length >= 5) {
@@ -68,6 +69,18 @@ public class CoursActivity extends AppCompatActivity {
                             }
                             if (list[0].equals("Yen")) {
                                 this.getCours().add(new CoursData("Yen Japonais",list[list.length-3],list[list.length-2],list[list.length-1])) ;
+                            }
+                            if ((list[0].equals("Ryal"))&&(list[1].equals("qatari"))) {
+                                this.getCours().add(new CoursData("Ryal qatari",list[list.length-3],list[list.length-2],list[list.length-1])) ;
+                            }
+                            if ((list[0].equals("Ryal"))&&(list[1].equals("saoudien"))) {
+                                this.getCours().add(new CoursData("Ryal Saoudien",list[list.length-3],list[list.length-2],list[list.length-1])) ;
+                            }
+                            if (list[0].equals("Franc")) {
+                                this.getCours().add(new CoursData("Franc suisse",list[list.length-3],list[list.length-2],list[list.length-1])) ;
+                            }
+                            if (list[0].equals("Dollar") && (list[1].equals("canadien"))) {
+                                this.getCours().add(new CoursData("Dollar canada",list[list.length-3],list[list.length-2],list[list.length-1])) ;
                             }
                         }
                     }
@@ -101,7 +114,7 @@ public class CoursActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.acceuil:
-                intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, Main2Activity.class);
                 startActivity(intent);
                 return true;
             case R.id.display_palmares:

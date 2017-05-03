@@ -212,10 +212,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, CoursActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.home2:
-                intent = new Intent(this, Main2Activity.class);
-                startActivity(intent);
-                return true;
+
 
 
         }

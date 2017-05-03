@@ -28,19 +28,22 @@
         <item>Dollar US</item>
         <item>Livre Sterling</item>
     </string-array>
-    <string name="title_activity_cours">CoursActivity</string>
+    <string name="title_activity_cours">cours d\'echange des devises</string>
 
 
 
 
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2">Acceuil</string>
     <string name="volumeTitre">volume(titre)</string>
     <string name="volume">volume(-)</string>
     <string name="ouverture">Ouverture</string>
     <string name="plus_haut">Plus Haut</string>
     <string name="plus_bas">Plus bas</string>
-    <string name="cloture">Cloture veille</string>
-    <string name="volatilite">volatilite</string>
+    <string name="cloture">Clôture veille</string>
+    <string name="volatilite">volatilité</string>
+    <string name="capital_echange">capital echangé</string>
+    <string name="valorisation">valorisation</string>
+    <string name="actu">Actualités</string>
 
 
 </resources>

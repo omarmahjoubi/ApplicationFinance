@@ -53,7 +53,6 @@ public class Main2Activity extends AppCompatActivity {
             private String urlImage;
             private String variation = "";
             private String cours = "";
-            private Bitmap bmpGraphe = null;
             private String volumeTitre = "" ;
             private String volume = "" ;
             private String ouverture = "" ;
@@ -112,48 +111,9 @@ public class Main2Activity extends AppCompatActivity {
 
                         Elements Actus = doc.select(".lks") ;
                         for (Element e : Actus) {
-                            System.out.println("titre ====> " + e.text() +",href ======> " + e.attr("href")) ;
+                            Actu actu = new Actu(e.text(),"http://www.ilboursa.com/marches/"+e.attr("href")) ;
+                            this.actus.add(actu) ;
                         }
-
-
-
-
-                        /*
-                        Elements variation = doc.select("div + span");
-                        for (Element el : variation) {
-                            this.variation = el.text();
-                        }
-                        Elements data = doc.select(".f14");
-                        for (Element el : data) {
-                            System.out.println(el.text()) ;
-                            if ((!el.text().contains("%")) && (el.text().length()<15)) {
-                                this.cours = el.text();
-                            }
-
-                        }
-
-                        Element img = doc.getElementById("ctl00_BodyABC_chartTN");
-                        urlImage = "http://www.ilboursa.com/" + img.attr("src");
-                        try {
-                            URL url = new URL(this.urlImage);
-                            bmpGraphe = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                            URL url1 = new URL("http://www.ilboursa.com/i/tn.png");
-                            bmpFlag = BitmapFactory.decodeStream(url1.openConnection().getInputStream());
-
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        Elements infos = doc.select(".f14");
-                        for (Element el : infos) {
-                            if (el.text().length() >= 15) {
-                                Actu actu = new Actu(el.text(), "http://www.ilboursa.com/" + el.attr("href"));
-                                this.actus.add(actu);
-                            }
-
-                        } */
-
 
                     }
                 }
@@ -175,11 +135,14 @@ public class Main2Activity extends AppCompatActivity {
                 cours.setText(this.cours);
 
                 TextView variation = (TextView) findViewById(R.id.variation) ;
+                ImageView variationImage = (ImageView) findViewById(R.id.variation_image) ;
                 variation.setText(this.variation);
                 if (this.variation.contains("+")) {
                     variation.setTextColor(Color.rgb(0,153,51));
+                    variationImage.setBackgroundResource(R.drawable.up);
                 } else if (this.variation.contains("-")) {
                     variation.setTextColor(Color.rgb(255, 0, 0));
+                    variationImage.setBackgroundResource(R.drawable.down);
                 }
 
                 TextView volumeTitre = (TextView) findViewById(R.id.volumeTitre) ;
@@ -203,6 +166,34 @@ public class Main2Activity extends AppCompatActivity {
                 TextView volatilite = (TextView) findViewById(R.id.volatilite) ;
                 volatilite.setText(this.volatilite);
 
+                TextView capital_echange = (TextView) findViewById(R.id.capital_echange) ;
+                capital_echange.setText(this.capitalEchange);
+
+                TextView valorisation = (TextView) findViewById(R.id.valorisation) ;
+                valorisation.setText(this.valorisation);
+
+                ListView actusList = (ListView) findViewById(R.id.actus) ;
+                ActuAdapter actuAdapter = new ActuAdapter(Main2Activity.this,this.actus) ;
+                actusList.setAdapter(actuAdapter);
+
+                actusList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent,
+                                            View view, int position, long id) {
+                        Actu actu = (Actu) parent.getAdapter().getItem(position);
+                        String url = actu.getUrl();
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                        intent.setData(Uri.parse(url));
+                        startActivity(intent);
+                    }
+                });
+
+
+
+
+
 
 
 
@@ -216,7 +207,6 @@ public class Main2Activity extends AppCompatActivity {
                         "urlImage='" + urlImage + '\'' +
                         ", variation='" + variation + '\'' +
                         ", cours='" + cours + '\'' +
-                        ", bmpGraphe=" + bmpGraphe +
                         ", volumeTitre='" + volumeTitre + '\'' +
                         ", volume='" + volume + '\'' +
                         ", ouverture='" + ouverture + '\'' +

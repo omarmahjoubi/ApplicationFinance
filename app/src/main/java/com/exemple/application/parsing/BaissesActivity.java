@@ -127,7 +127,7 @@ public class BaissesActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.acceuil:
-                intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, Main2Activity.class);
                 startActivity(intent);
                 return true;
             case R.id.hausses:
