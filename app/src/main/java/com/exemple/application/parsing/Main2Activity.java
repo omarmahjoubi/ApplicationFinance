@@ -42,6 +42,7 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        this.setTitle(getResources().getString(R.string.title_activity_main2));
 
         new URLReader().execute("http://www.ilboursa.com/marches/cotation.aspx?s=PX1");
     }

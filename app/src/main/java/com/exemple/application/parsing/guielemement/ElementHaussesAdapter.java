@@ -66,7 +66,7 @@ public class ElementHaussesAdapter extends ArrayAdapter<ElementHaussesList> {
 
         if (isNetworkAvailable()) {
             viewHolder.volume_label.setText("volume :");
-            viewHolder.cours_label.setText("cours :");
+            viewHolder.cours_label.setText("dernier cours :");
             viewHolder.variation_label.setText("variation :");
         }
 

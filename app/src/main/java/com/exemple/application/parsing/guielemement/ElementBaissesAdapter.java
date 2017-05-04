@@ -58,7 +58,7 @@ public class ElementBaissesAdapter extends ArrayAdapter<ElementBaissesList> {
         viewHolder.cours.setText(elementBaissesList.getCours());
 
         if (isNetworkAvailable()) {
-            viewHolder.cours_label.setText("cours :");
+            viewHolder.cours_label.setText("dernier cours :");
             viewHolder.variation_label.setText("variation :");
         }
 
